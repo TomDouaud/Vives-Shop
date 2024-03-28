@@ -1,0 +1,36 @@
+﻿@model BuyingSession
+@{
+    ViewData["Title"] = "Item Management Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form action="@Url.Action("AddItem", "ItemManager")" method="post">
+                <div class="col-12">
+                    <h1>Add an item</h1>
+                    <input type="text" name="name" placeholder="Name of the item" required />
+                    <input type="text" name="price" placeholder="Price of the item" pattern="\d+\.\d{1,2}" required />
+                    <button type="submit" class="btn btn-primary">Add item</button>
+                </div>
+            </form>
+        </div>
+        <div class="col-12">
+            <h1>Edit/Remove Items</h1>
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-12">
+                    <form action="@Url.Action("RedirectToEdit", "ItemManager")" method="post">
+                        <input type="hidden" name="itemName" value="@item.Name" />
+                        <button type="submit" class="btn btn-warning" value="@item">Edit @item.Name (€ @item.Price) - </button>
+                    </form>
+                    <form action="@Url.Action("RemoveItem", "ItemManager")" method="post">
+                        <input type="hidden" name="itemName" value="@item.Name" />
+                        <button type="submit" class="btn btn-danger" value="@item">Remove @item.Name (€ @item.Price) - </button>
+                    </form>
+                </div>
+            }
+        </div>
+
+    </div>
+</div>

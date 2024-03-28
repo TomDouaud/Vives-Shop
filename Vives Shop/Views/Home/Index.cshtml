@@ -11,7 +11,7 @@
             {
                 <div class="col-12">
                     <form action="@Url.Action("AddToCart", "Home")" method="post">
-                        <input type="hidden" name="itemId" value="@item.Id" />
+                        <input type="hidden" name="itemName" value="@item.Name" />
                         <button type="submit" class="btn btn-light" value="@item">@item.Name (€ @item.Price) + </button>
                     </form>
                 </div>
@@ -23,7 +23,7 @@
             {
                 <div class="col-12">
                     <form action="@Url.Action("RemoveFromCart", "Home")" method="post">
-                        <input type="hidden" name="itemId" value="@item.Id" />
+                        <input type="hidden" name="itemName" value="@item.Name" />
                         <button type="submit" class="btn btn-warning" value="@item">@item.Name (€ @item.Price) - </button>
                     </form>
                 </div>

@@ -1,0 +1,20 @@
+﻿@model Item
+@{
+    ViewData["Title"] = "Edit Item Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-12">
+            <form action="@Url.Action("ConfirmChanges", "ItemManager")" method="post">
+                <div class="col-12">
+                    <h1>Edit your item</h1>
+                    <input type="hidden" name="oldName" value="@Model.Name" />
+                    <input type="text" name="itemName" placeholder="Name of the item" value="@Model.Name" required />
+                    <input type="text" name="price" placeholder="Price of the item" value="@Model.Price" pattern="\d+\.\d{1,2}" required />
+                    <button type="submit" class="btn btn-primary">Add item</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

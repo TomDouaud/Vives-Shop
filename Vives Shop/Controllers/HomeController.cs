@@ -20,7 +20,8 @@ namespace Vives_Shop.Controllers
 
         public IActionResult Index()
         {
-
+            // Refresh the items list
+            model.refreshItems(_vivesShopDbContext.Items.ToList());
             return View(this.model);
         }
 
@@ -30,16 +31,16 @@ namespace Vives_Shop.Controllers
         }
 
         [HttpPost]
-        public IActionResult AddToCart(int itemID)
+        public IActionResult AddToCart(string itemName)
         {
-            model.AddItem(itemID);
+            model.AddItem(itemName);
             return RedirectToAction("Index", "Home");
         }
 
         [HttpPost]
-        public IActionResult RemoveFromCart(int itemID)
+        public IActionResult RemoveFromCart(string itemName)
         {
-            model.RemoveItem(itemID);
+            model.RemoveItem(itemName);
             return RedirectToAction("Index", "Home");
         }
 

@@ -34,16 +34,22 @@ namespace Vives_Shop.Models
             }
         }
 
-        public void AddItem(int itemID)
+        public void refreshItems(List<Item> items)
         {
-            ItemsInCart.Add(Items[itemID -1]);
-            TotalPrice += Items[itemID -1].Price;
+            instance.Items = items;
         }
 
-        public void RemoveItem(int itemID)
+        public void AddItem(string itemName)
         {
-            ItemsInCart.Remove(Items[itemID - 1]);
-            TotalPrice -= Items[itemID - 1].Price;
+            ItemsInCart.Add(Items.FirstOrDefault(i => i.Name == itemName));
+            TotalPrice += Items.FirstOrDefault(i => i.Name == itemName).Price;
+        }
+
+        public void RemoveItem(string itemName)
+        {
+           // int itemToRemove = Items.First(i => i.Name == itemName).Id;
+            ItemsInCart.Remove(ItemsInCart.First(i => i.Name == itemName));
+            TotalPrice -= Math.Round(Items.FirstOrDefault(i => i.Name == itemName).Price, 1);
         }
 
     }
