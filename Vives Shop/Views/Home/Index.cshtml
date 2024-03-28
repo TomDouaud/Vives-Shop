@@ -1,0 +1,37 @@
+﻿@model BuyingSession
+@{
+    ViewData["Title"] = "Home Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <div class="col-6">
+            <h1>Shop Items</h1>
+            @foreach (var item in Model.Items)
+            {
+                <div class="col-12">
+                    <form action="@Url.Action("AddToCart", "Home")" method="post">
+                        <input type="hidden" name="itemId" value="@item.Id" />
+                        <button type="submit" class="btn btn-light" value="@item">@item.Name (€ @item.Price) + </button>
+                    </form>
+                </div>
+            }
+        </div>
+        <div class="col-6">
+            <h1>Shopping cart</h1>
+            @foreach (var item in Model.ItemsInCart)
+            {
+                <div class="col-12">
+                    <form action="@Url.Action("RemoveFromCart", "Home")" method="post">
+                        <input type="hidden" name="itemId" value="@item.Id" />
+                        <button type="submit" class="btn btn-warning" value="@item">@item.Name (€ @item.Price) - </button>
+                    </form>
+                </div>
+            }
+            <h1>Total: € @Model.TotalPrice</h1>
+            <form action="@Url.Action("Checkout", "Home")" method="post">
+                <button type="submit" class="btn btn-primary">Checkout</button>
+            </form>
+        </div>
+    </div>
+</div>

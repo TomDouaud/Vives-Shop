@@ -1,0 +1,66 @@
+﻿@model BuyingSession
+@{
+    ViewData["Title"] = "Checkout Page";
+}
+
+<div class="container-fluid">
+    <div class="row">
+        <h1 class="text-center">Summary of your order</h1>
+        <ul>
+        @foreach (var item in Model.ItemsInCart)
+        {
+            <li>@item.Name - € @item.Price</li>  
+        }
+        </ul>
+        @if (!Model.IsPaid)
+        {
+            <h1 class="text-center">Choose your payement option</h1>
+            <div class="col-4">
+                <form class="text-center" action="@Url.Action("Pay", "Checkout")" method="post">
+                    <input type="hidden" name="PayingMethod" value="credit card" />
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Pay with credit card</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <form class="text-center" action="@Url.Action("Pay", "Checkout")" method="post">
+                    <input type="hidden" name="PayingMethod" value="PayPal" />
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Pay with PayPal</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <form class="text-center" action="@Url.Action("Pay", "Checkout")" method="post">
+                    <input type="hidden" name="PayingMethod" value="Bancontact" />
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Pay with Bancontact</button>
+                </form>
+            </div>
+            <br />
+            <div class="col-4">
+                <form class="text-center" action="@Url.Action("Pay", "Checkout")" method="post">
+                    <input type="hidden" name="PayingMethod" value="iDeal" />
+                    <button type="submit" class="btn btn-primary btn-lg btn-block">Pay with iDeal</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <form class="text-center" action="@Url.Action("Pay", "Checkout")" method="post">
+                    <input type="hidden" name="PayingMethod" value="Bitcoin" />
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" value="Bitcoin">Pay with Bitcoin</button>
+                </form>
+            </div>
+            <div class="col-4">
+                <form class="text-center" action="@Url.Action("Pay", "Checkout")" method="post">
+                    <input type="hidden" name="PayingMethod" value="Cash" />
+                    <button type="submit" class="btn btn-primary btn-lg btn-block" value="Cash">Pay with Cash</button>
+                </form>
+            </div>
+        } 
+        else
+        {
+            <h1>Thank you for your purchase! You have payed with @Model.PayingMethod</h1>
+        }
+
+        <br>
+        <form action="@Url.Action("Return", "Checkout")" method="post">
+            <button type="submit" class="btn btn-primary">Return to shop</button>
+        </form>
+    </div>
+</div>
